@@ -1,11 +1,11 @@
 package com.fnbo.reactiveapi.client;
 
 import com.fnbo.reactiveapi.model.Comment;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -13,16 +13,15 @@ import static org.springframework.http.HttpMethod.GET;
 
 @Service
 public class DataClient {
-    private final RestTemplate restTemplate;
+    private final WebClient webClient;
 
-    public DataClient(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    public DataClient(WebClient webClient) {
+        this.webClient = webClient;
     }
 
-    public List<Comment> getAllComments() {
-        return restTemplate.exchange("http://localhost:8565/api/v1/comments",
-                GET,
-                null,
-                new ParameterizedTypeReference<List<Comment>>() {}).getBody();
+    public Mono<List<Comment>> getAllComments() {
+        return webClient.get().uri("http://localhost:8565/api/v1/comments")
+        .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<Comment>>() {});
     }
 }

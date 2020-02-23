@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     private String text;
     private LocalDateTime addTimestamp;
 }

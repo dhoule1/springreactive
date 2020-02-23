@@ -21,9 +21,11 @@ public class SeedDataInitializer {
 
     @EventListener(ApplicationReadyEvent.class)
     public void ready() {
-        Stream.of("First", "Second", "Third Comment")
+        List<Comment> comments = Stream.of("First", "Second", "Third Comment")
                 .map(text -> new Comment(null, text, LocalDateTime.now()))
-                .forEach(this.commentRepository::save);
+                .collect(Collectors.toList());
+
+        commentRepository.saveAll(comments);
 
     }
 }
