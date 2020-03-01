@@ -18,7 +18,9 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/comments")
-    public ResponseEntity<Flux<Comment>> getComments() {
-        return ResponseEntity.ok(dataClient.findAll());
+    public ResponseEntity<List<Comment>> getComments() {
+        List<Comment> comments = new ArrayList<>();
+        dataClient.findAll().forEach(comments::add);
+        return ResponseEntity.ok(comments);
     }
 }

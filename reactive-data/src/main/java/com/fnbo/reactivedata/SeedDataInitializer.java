@@ -25,8 +25,7 @@ public class SeedDataInitializer {
                 .map(text -> new Comment(null, text, LocalDateTime.now()))
                 .collect(Collectors.toList());
 
-        commentRepository.deleteAll()
-                .and(commentRepository.saveAll(comments))
-                .subscribe();
+        commentRepository.deleteAll();
+        commentRepository.saveAll(comments);
     }
 }
