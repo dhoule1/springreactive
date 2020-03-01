@@ -6,10 +6,6 @@ spring:
     username: root
     password: root
   r2dbc:
-    url: r2dbc:pool:mysql://127.0.0.1:3306/commentdb
+    url: r2dbc:pool:mysql://127.0.0.1:3306/commentdb?createDatabaseIfNotExist=true
     username: root
     password: root
-
-  jpa:
-    hibernate:
-      ddl-auto: 'create-drop'
