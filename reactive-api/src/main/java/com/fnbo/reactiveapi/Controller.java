@@ -20,7 +20,7 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/comments")
-    public ResponseEntity<Mono<List<Comment>>> getComments() {
+    public ResponseEntity<Flux<Comment>> getComments() {
         return ResponseEntity.ok(dataClient.getAllComments());
     }
 }

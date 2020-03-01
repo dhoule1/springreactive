@@ -19,9 +19,9 @@ public class DataClient {
         this.webClient = webClient;
     }
 
-    public Mono<List<Comment>> getAllComments() {
+    public Flux<Comment> getAllComments() {
         return webClient.get().uri("http://localhost:8565/api/v1/comments")
         .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<Comment>>() {});
+                .bodyToFlux(Comment.class);
     }
 }
