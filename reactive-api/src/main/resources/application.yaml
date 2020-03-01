@@ -1,2 +1,7 @@
 server:
   port: 8564
+
+logging:
+  level:
+    root: info
+    org.springframework.web: debug
