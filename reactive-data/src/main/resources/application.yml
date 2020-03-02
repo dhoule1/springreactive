@@ -1,5 +1,6 @@
 server:
   port: 8565
+
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/commentdb?createDatabaseIfNotExist=true
@@ -9,3 +10,10 @@ spring:
     url: r2dbc:pool:mysql://127.0.0.1:3306/commentdb?createDatabaseIfNotExist=true
     username: root
     password: root
+
+flyway:
+  clean: true
+  url: jdbc:mysql://localhost:3306/mysql
+  schemas: commentdb
+  user: root
+  password: root

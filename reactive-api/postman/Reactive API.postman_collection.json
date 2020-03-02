@@ -1,0 +1,21 @@
+{
+	"info": {
+		"_postman_id": "73a096bf-054e-4a66-bf85-9b1ca341007e",
+		"name": "Reactive API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
