@@ -1,19 +1,25 @@
 package com.fnbo.reactiveapi.client;
 
 import com.fnbo.reactiveapi.model.Comment;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
+import org.springframework.web.client.RestTemplate;
+
+import java.lang.reflect.Type;
+import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @Service
 public class DataClient {
-    private final WebClient webClient;
+    private final RestTemplate restTemplate;
 
-    public DataClient(WebClient webClient) {
-        this.webClient = webClient;
+    public DataClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
-    public Flux<Comment> getAllComments() {
-        return webClient.get().uri("http://localhost:8565/api/v1/comments").retrieve().bodyToFlux(Comment.class);
+    public List<Comment> getAllComments() {
+        return restTemplate.exchange("http://localhost:8565/api/v1/comments", HttpMethod.GET, null, new ParameterizedTypeReference<List<Comment>>() {}).getBody();
     }
 }

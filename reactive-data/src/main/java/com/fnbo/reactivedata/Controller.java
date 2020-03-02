@@ -4,10 +4,10 @@ import com.fnbo.reactivedata.model.Comment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Flux;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class Controller {
@@ -18,7 +18,8 @@ public class Controller {
     }
 
     @GetMapping("/api/v1/comments")
-    public ResponseEntity<Flux<Comment>> getComments() {
-        return ResponseEntity.ok(dataClient.findAll());
+    public ResponseEntity<List<Comment>> getComments() {
+        List<Comment> comments = StreamSupport.stream(dataClient.findAll().spliterator(), false).collect(Collectors.toList());
+        return ResponseEntity.ok(comments);
     }
 }
